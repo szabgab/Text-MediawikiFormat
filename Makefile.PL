@@ -1,5 +1,5 @@
 use ExtUtils::MakeMaker;
-my %conf = (
+my %conf = 
 (
           'NAME' => 'Text::MediawikiFormat',
           'VERSION_FROM' => 'lib/Text/MediawikiFormat.pm',
@@ -10,7 +10,7 @@ my %conf = (
                            'Test::Warn' => '0',
                            'URI' => '0',
                            'URI::Escape' => '0',
-                           'version' => '0.74'
+                           'version' => '0.74',
                            'HTML::Parser' => '0', # recommended only
                            'HTML::Tagset' => '0', # recommented only
 
