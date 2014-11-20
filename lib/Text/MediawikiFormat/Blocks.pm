@@ -3,7 +3,7 @@ package Text::MediawikiFormat::Blocks;
 use strict;
 use warnings::register;
 
-use Text::MediaWikiFormat::Block;
+use Text::MediawikiFormat::Block;
 
 our $VERSION = '1.02';
 
