@@ -5,7 +5,7 @@ use warnings::register;
 
 use Text::MediawikiFormat::Block;
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 sub import
 {
