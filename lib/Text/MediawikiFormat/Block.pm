@@ -5,7 +5,7 @@ use warnings::register;
 
 use Scalar::Util qw( blessed reftype );
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 sub new {
 	my ( $class, %args ) = @_;
