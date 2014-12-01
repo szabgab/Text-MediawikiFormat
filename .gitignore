@@ -1,6 +1,7 @@
-MYMETA.*
-META.*
-Makefile
-blib/
-pm_to_blib
-Text-MediawikiFormat-*
+/META.*
+/MYMETA.*
+/Makefile
+/Text-MediawikiFormat-*
+/blib/
+/pm_to_blib
+/.tidyall.d/
