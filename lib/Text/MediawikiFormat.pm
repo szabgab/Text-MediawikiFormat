@@ -17,9 +17,9 @@ our $VERSION = '1.03';
 
 =head1 SYNOPSIS
 
-	use Text::MediawikiFormat 'wikiformat';
-	my $html = wikiformat ($raw);
-	my $text = wikiformat ($raw, {}, {implicit_links => 1});
+    use Text::MediawikiFormat 'wikiformat';
+    my $html = wikiformat ($raw);
+    my $text = wikiformat ($raw, {}, {implicit_links => 1});
 
 =head1 DESCRIPTION
 
@@ -338,7 +338,7 @@ The prefix of any links to wiki pages.  In HTML mode, this is the path to the
 Wiki.  The actual linked item itself will be appended to the prefix.  This is
 useful to create full URIs:
 
-	{prefix => 'http://example.com/wiki.pl?page='}
+    {prefix => 'http://example.com/wiki.pl?page='}
 
 =item extended
 
@@ -347,8 +347,8 @@ An optional title may occur after the Wiki targets, preceded by an open pipe.
 URI titles are separated from their title with a space.  These are valid
 extended links:
 
-	[[A wiki page|and the title to display]]
-	[http://ximbiot.com URI title]
+    [[A wiki page|and the title to display]]
+    [http://ximbiot.com URI title]
 
 Where the linking semantics of the destination format allow it, the result will
 display the title instead of the URI.  In HTML terms, the title is the content
@@ -1097,8 +1097,8 @@ If you'd like to make your life more convenient, you can optionally import a
 subroutine that already has default tags and options set up.  This is
 especially handy if you use a prefix:
 
-	use Text::MediawikiFormat prefix => 'http://www.example.com/';
-	wikiformat ('some text');
+    use Text::MediawikiFormat prefix => 'http://www.example.com/';
+    wikiformat ('some text');
 
 Tags are interpreted as default members of the $tags hash normally passed to
 C<format>, except for the five options (see above) and the C<as> key, who's
@@ -1107,8 +1107,8 @@ value is interpreted as an alternate name for the imported function.
 To use the C<as> flag to control the name by which your code calls the imported
 function, for example,
 
-	use Text::MediawikiFormat as => 'formatTextWithWikiStyle';
-	formatTextWithWikiStyle ('some text');
+    use Text::MediawikiFormat as => 'formatTextWithWikiStyle';
+    formatTextWithWikiStyle ('some text');
 
 You might choose a better name, though.
 
@@ -1116,8 +1116,8 @@ The calling semantics are effectively the same as those of the C<format()>
 function.  Any additional tags or options to the imported function will
 override the defaults.  This code:
 
-	use Text::MediawikiFormat as => 'wf', extended => 0;
-	wf ('some text', {}, {extended => 1});
+    use Text::MediawikiFormat as => 'wf', extended => 0;
+    wf ('some text', {}, {extended => 1});
 
 enables extended links, after specifying that the default behavior should be
 to disable them.
@@ -1137,26 +1137,26 @@ subtypes, extended, implicit, or absolute.
 
 You can change the regular expressions used to find strong and emphasized tags:
 
-	%tags = (
-		strong_tag     => qr/\*([^*]+?)\*/,
-		emphasized_tag => qr|/([^/]+?)/|,
-	);
+    %tags = (
+        strong_tag     => qr/\*([^*]+?)\*/,
+        emphasized_tag => qr|/([^/]+?)/|,
+    );
 
-	$wikitext = 'this is *strong*, /emphasized/, and */em+strong/*';
-	$htmltext = wikiformat ($wikitext, \%tags, {});
+    $wikitext = 'this is *strong*, /emphasized/, and */em+strong/*';
+    $htmltext = wikiformat ($wikitext, \%tags, {});
 
 You can also change the regular expressions used to find links.  The following
 just sets them to their default states (but enables parsing of implicit links,
 which is I<not> the default):
 
-	my $html = wikiformat
-	(
-	    $raw,
-	    {implicit_link_delimiters => qr!\b(?:[A-Z][a-z0-9]\w*){2,}!,
-	     extended_link_delimiters => qr!\[(?:\[[^][]*\]|[^][]*)\]!,
-	    },
-	    {implicit_links => 1}
-	);
+    my $html = wikiformat
+    (
+        $raw,
+        {implicit_link_delimiters => qr!\b(?:[A-Z][a-z0-9]\w*){2,}!,
+         extended_link_delimiters => qr!\[(?:\[[^][]*\]|[^][]*)\]!,
+        },
+        {implicit_links => 1}
+    );
 
 In addition, you may set the function references that format strong and
 emphasized text and links.  The strong and emphasized functions receive only
@@ -1166,33 +1166,33 @@ and C<$opts> arrays.  For example, the following sets the strong and
 emphasized formatters to their default state while replacing the link formatter
 with one which strips href information and returns only the title text:
 
-	my $html = wikiformat
-	(
-	    $raw,
-	    {strong => sub {"<strong>$_[0]</strong>"},
-	     emphasized => sub {"<em>$_[0]</em>"},
-	     link => sub
-	     {
-		 my ($tag, $opts, $tags) = @_;
-		 if ($tag =~ s/^\[\[([^][]+)\]\]$/$1/)
-		 {
-		     my ($page, $title) = split qr/\|/, $tag, 2;
-		     return $title if $title;
-		     return $page;
-		 }
-		 elsif ($tag =~ s/^\[([^][]+)\]$/$1/)
-		 {
-		     my ($href, $title) = split qr/ /, $tag, 2;
-		     return $title if $title;
-		     return $href;
-		 }
-		 else
-		 {
-		     return $tag;
-		 }
-	     },
-	    },
-	);
+    my $html = wikiformat
+    (
+        $raw,
+        {strong => sub {"<strong>$_[0]</strong>"},
+         emphasized => sub {"<em>$_[0]</em>"},
+         link => sub
+         {
+         my ($tag, $opts, $tags) = @_;
+         if ($tag =~ s/^\[\[([^][]+)\]\]$/$1/)
+         {
+             my ($page, $title) = split qr/\|/, $tag, 2;
+             return $title if $title;
+             return $page;
+         }
+         elsif ($tag =~ s/^\[([^][]+)\]$/$1/)
+         {
+             my ($href, $title) = split qr/ /, $tag, 2;
+             return $title if $title;
+             return $href;
+         }
+         else
+         {
+             return $tag;
+         }
+         },
+        },
+    );
 
 =head3 Blocks
 
@@ -1206,13 +1206,13 @@ needs to be more processing of individual lines, use a subref as the third
 item.  This is how the module processes ordered lines in HTML lists and
 headers:
 
-	my $html = wikiformat
-	(
-	    $raw,
-	    {ordered => ['<ol>', "</ol>\n", '<li>', "<li>\n"],
-	     header => ['', "\n", \&_make_header],
-	    },
-	);
+    my $html = wikiformat
+    (
+        $raw,
+        {ordered => ['<ol>', "</ol>\n", '<li>', "<li>\n"],
+         header => ['', "\n", \&_make_header],
+        },
+    );
 
 The first argument to these subrefs is the post-processed text of the line
 itself.  (Processing removes the indentation and tokens used to mark this as a
@@ -1221,11 +1221,11 @@ argument is the indentation level (see below).  The subsequent arguments are
 captured variables in the regular expression used to find this list type.  The
 regexp for headers is:
 
-	$html = wikiformat
-	(
-	    $raw,
-	    {blocks => {header => qr/^(=+)\s*(.+?)\s*\1$/}}
-	);
+    $html = wikiformat
+    (
+        $raw,
+        {blocks => {header => qr/^(=+)\s*(.+?)\s*\1$/}}
+    );
 
 The module processes indentation first, if applicable, and stores the
 indentation level (the length of the indentation removed).
@@ -1238,17 +1238,17 @@ this order.  It contains a reference to an array of the names of the
 appropriate blocks to process.  If you add a block type, be sure to add an
 entry for it in C<blockorder>:
 
-	my $html = wikiformat
-	(
-	    $raw,
-	    {invisible => ['', '', '', ''],
-	     blocks => {invisible => qr!^--(.*?)--$!},
-			blockorder => [qw(code header line ordered
-					  unordered definition invisible
-					  paragraph_break paragraph)]
-		       },
-	    },
-	);
+    my $html = wikiformat
+    (
+        $raw,
+        {invisible => ['', '', '', ''],
+         blocks => {invisible => qr!^--(.*?)--$!},
+            blockorder => [qw(code header line ordered
+                      unordered definition invisible
+                      paragraph_break paragraph)]
+               },
+        },
+);
 
 =head3 Finding blocks
 
@@ -1257,7 +1257,7 @@ expressions to find blocks.  These are in the C<%tags> hash under the C<blocks>
 key.  For example, to change the regular expression to find code block items,
 use:
 
-	my $html = wikiformat ($raw, {blocks => {code => qr/^:\s+/}});
+    my $html = wikiformat ($raw, {blocks => {code => qr/^:\s+/}});
 
 This will require a leading colon to mark code lines (note that as writted
 here, this would interfere with the default processing of definition lists).
