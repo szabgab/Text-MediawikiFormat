@@ -1,4 +1,5 @@
 /.tidyall.d/
+/MANIFEST.bak
 /META.*
 /MYMETA.*
 /Makefile
