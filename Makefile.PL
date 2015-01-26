@@ -29,11 +29,11 @@ if ( eval { ExtUtils::MakeMaker->VERSION(6.46) } ) {
 				type    => 'git',
 				url     => 'http://github.com/szabgab/Text-MediawikiFormat.git',
 				web     => 'http://github.com/szabgab/Text-MediawikiFormat',
-				license => 'http://dev.perl.org/licenses/',
 			},
 			bugtracker => {
 				web => 'http://github.com/szabgab/Text-MediawikiFormat/issues',
 			},
+			license => 'http://dev.perl.org/licenses/',
 		},
 	};
 }
