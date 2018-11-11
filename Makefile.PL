@@ -3,6 +3,7 @@ my %conf = (
 	'NAME'         => 'Text::MediawikiFormat',
 	'VERSION_FROM' => 'lib/Text/MediawikiFormat.pm',
 	'PREREQ_PM'    => {
+		'perl'             => '5.006',
 		'CGI'              => '0',
 		'Scalar::Util'     => '1.14',
 		'Test::More'       => '0.3',
