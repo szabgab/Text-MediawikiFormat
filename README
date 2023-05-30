@@ -5,3 +5,10 @@ semi-regular tag language.
 This program is Free Software, provided without warranty or implied
 merchantability, but available under the same terms as Perl itself.  What a
 deal!  It's copyrighted and copylefted 2002 - 2006, chromatic.
+
+## Release process
+
+    perl Makefile.PL
+    make
+    make test
+    make dist
